@@ -3,8 +3,8 @@
 
 # ----------------------------------------------------------------------------
 # :author:  Mikael FLORA <mikaelflora@hotmail.com>
-# :version: 0.1.1
-# :date:    2016-06-11
+# :version: 0.1.2
+# :date:    2016-06-16
 # :brief:   config parser (ini file) with associative array
 # :TODO:    code review ini.common.to.Array and ini.to.Array
 # ----------------------------------------------------------------------------
@@ -16,7 +16,8 @@ ini.common.to.Array () {
 # $1: file to parse
 # $2: associative array name to use
   while read line; do
-    if [[ $line == ?*"="?* ]]; then
+    #if [[ $line == ?*"="?* ]]; then
+    if [[ $line == ?*"=" ]]; then
       key=$(echo "${line%%=*}" | sed 's/[ \t]*//g')
         value=$(echo "${line##*=}" | sed 's/^[ \t]*//;s/[ \t]*$//')
         tmp=${2}[${key}]
@@ -40,7 +41,8 @@ ini.to.Array () {
 
   if [ -f ${1} ]; then
     while read line; do
-      if [[ $line == ?*"="?* ]]; then
+      #if [[ $line == ?*"="?* ]]; then
+      if [[ $line == ?*"=" ]]; then
         key=$(echo "${line%%=*}" | sed 's/[ \t]*//g')
         value=$(echo "${line##*=}" | sed 's/^[ \t]*//;s/[ \t]*$//')
         tmp=${2}[${key}]
@@ -125,6 +127,7 @@ if [ "${BASH_SOURCE##*/}" = "${0##*/}" ]; then
   declare -A CONFIG=(
     [f]="foo"
     [b]="bar"
+    [t]=""
   )
 
   declare -A CONF=(
@@ -142,6 +145,8 @@ if [ "${BASH_SOURCE##*/}" = "${0##*/}" ]; then
 #  unset CONF[b]
   echo "modify CONFIG[b]=Hello World,"
   CONFIG[b]="Hello World"
+  echo "modify CONFIG[t]=Hello World,"
+  CONFIG[t]="Hello World"
   echo "and print associative arrays:"
   iniparse.print CONF CONFIG
   echo "load test.conf in associative arrays,"
@@ -150,4 +155,17 @@ if [ "${BASH_SOURCE##*/}" = "${0##*/}" ]; then
   iniparse.print CONF CONFIG
   echo "rm test.conf"
   rm test.conf
+
+  unset $key $value
+  echo "print not void values in CONFIG:"
+  for key in ${!CONFIG[@]}; do
+    if [[ ${CONFIG[${key}]} ]]; then
+      echo "$value=$key"
+    fi
+  done
+  unset $key $value
+  echo "print set key in CONFIG:"
+  for key in ${!CONFIG[@]}; do
+    test ${CONFIG[${key}]+a} && echo "$value=$key"
+  done
 fi
