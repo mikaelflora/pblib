@@ -4,7 +4,7 @@
 
 Personal Bash libraries:  
 
-  - **checking.bash**: check syntax
+  - **checking.bash**: check syntax (IPv4 and MAC addresses)
   - **iniparsing.bash**: handling file configuration (INI file)
   - **logging.bash**: basic logger
   - **syslogging.bash**: syslogger (logger wrapper)
@@ -15,11 +15,8 @@ Personal Bash libraries:
 
 ### Installation
 
-Get source code and install:  
-
 ```bash
-git clone https://github.com/mikaelflora/pblib.git
-./pblib/install.bash
+./setup install
 ```
 
 ### Usage
@@ -30,13 +27,13 @@ In your source code:
 #!/bin/bash
 
 # import library path:
-PATH=${PATH}:/usr/local/lib/bash/pblib
+PATH=${PATH}:/usr/local/lib/bash/pbl
 
 # Use a specific library:
 . logging.bash
 
 # Or all libraries (except logging):
-. pblib.bash
+. pbl.bash
 ```
 
 ## License

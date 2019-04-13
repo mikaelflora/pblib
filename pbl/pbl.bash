@@ -11,7 +11,7 @@
 . checking.bash
 . iniparsing.bash
 . processing.bash
-. syslogging.bash
+. logging.bash
 . ui.bash
 
 
