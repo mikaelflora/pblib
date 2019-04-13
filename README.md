@@ -32,11 +32,15 @@ PATH=${PATH}:/usr/local/lib/bash/pbl
 # Use a specific library:
 . logging.bash
 
-# Or all libraries (except logging):
+# Or all libraries (except syslogging):
 . pbl.bash
 ```
 
 ## License
 
 GNU General Public License v3 (GPL-3). See `LICENSE` for further details.
+
+## Bugs
+
+Bugs report to [https://github.com/mikaelflora/pblibraries/issues](https://github.com/mikaelflora/pblibraries/issues).  
 

@@ -2,9 +2,10 @@
 
 
 # ----------------------------------------------------------------------------
-# :author:  Mikael FLORA
-# :date:    2019-04-13
-# :brief:   import all libraries
+# :author:     Mikael FLORA
+# :maintainer: <https://github.com/mikaelflora/pblibraries/issues>
+# :date:       2019-04-13
+# :brief:      import all libraries
 # ----------------------------------------------------------------------------
 
 
