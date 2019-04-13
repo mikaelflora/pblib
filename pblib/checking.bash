@@ -2,13 +2,13 @@
 
 
 # ----------------------------------------------------------------------------
-# :author:  Mikael FLORA <mikaelflora@hotmail.com>
-# :version: 0.1
-# :date:    2016-06-12
-# :brief:   check syntax
+# :author:  Mikael FLORA
+# :date:    2019-04-13
+# :brief:   check syntax (IP and MAC addresses)
 # ----------------------------------------------------------------------------
 
 
+# checking functions -->
 valid.MAC? () {
 # desc:
 # $1: MAC address
@@ -16,14 +16,12 @@ valid.MAC? () {
   [[ "$1" =~ ^([a-fA-F0-9]{2}:){5}[a-zA-Z0-9]{2}$ ]] && return 0 || return 1
 }
 
-
 invalid.MAC? () {
 # desc:
 # $1: MAC address
 # $?: 0 (invalid) or 1 (valid)
   [[ "$1" =~ ^([a-fA-F0-9]{2}:){5}[a-zA-Z0-9]{2}$ ]] && return 1 || return 0
 }
-
 
 valid.IP? () {
 # desc:
@@ -33,7 +31,6 @@ valid.IP? () {
   [[ "$1" =~ ^$rx\.$rx\.$rx\.$rx$ ]] && return 0 || return 1
 }
 
-
 invalid.IP? () {
 # desc:
 # $1: IP address
@@ -41,22 +38,22 @@ invalid.IP? () {
   rx='([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])'
   [[ "$1" =~ ^$rx\.$rx\.$rx\.$rx$ ]] && return 1 || return 0
 }
+# checking functions <--
 
 
-if [ "${BASH_SOURCE##*/}" = "${0##*/}" ]; then
-  mac="13:9E:EF:9C:00:AB"
-  ip="192.168.100.254"
-
-
-  if valid.MAC? ${mac}; then
-    echo "valid MAC address: $mac"
-  else
-    echo "invalid MAC address: $mac"
-  fi
-
-  if invalid.IP? ${ip}; then
-    echo "invalid IP address: $ip"
-  else
-    echo "valid IP address: $ip"
-  fi
-fi
+## examples -->
+#  mac="13:9E:EF:9C:00:AB"
+#  ip="192.168.100.254"
+#  
+#  if valid.MAC? ${mac}; then
+#    echo "valid MAC address: $mac"
+#  else
+#    echo "invalid MAC address: $mac"
+#  fi
+#  
+#  if invalid.IP? ${ip}; then
+#    echo "invalid IP address: $ip"
+#  else
+#    echo "valid IP address: $ip"
+#  fi
+## examples <--

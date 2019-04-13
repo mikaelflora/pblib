@@ -2,13 +2,13 @@
 
 
 # ----------------------------------------------------------------------------
-# :author:  Mikael FLORA <mikaelflora@hotmail.com>
-# :version: 0.1
-# :date:    2016-06-11
+# :author:  Mikael FLORA
+# :date:    2019-04-13
 # :brief:   basic logger system
 # ----------------------------------------------------------------------------
 
 
+# logging configuration -->
 declare -A _LOGGING=(
   [level]=5
   [tag]=${0##*/}
@@ -17,8 +17,10 @@ declare -A _LOGGING=(
   [dateformat]="%Y-%m-%d %H:%M:%S"
   [dateoption]=""
 )
+# logging configuration <--
 
 
+# debug function -->
 debug? () {
 # desc: IF debug mode AND $@ => execute command
 #       IF debug mode => return 0
@@ -35,8 +37,10 @@ debug? () {
     return 1
   fi
 }
+# debug function <--
 
 
+# logging functions -->
 log.init () {
 # desc: initialize _LOGGING array
 # $*: level=7 facility=daemon tag=$0 pid=$$
@@ -45,7 +49,6 @@ log.init () {
     shift
   done
 }
-
 
 _log () {
 # desc: logger wrapper
@@ -56,7 +59,6 @@ _log () {
     echo `date ${_LOGGING[dateoption]} +"${_LOGGING[dateformat]}"`" $HOSTNAME ${_LOGGING[tag]}[${_LOGGING[pid]}]: <${2}> ${*:3}" >> ${_LOGGING[file]}
   fi
 }
-
 
 shopt -s expand_aliases
 
@@ -70,16 +72,17 @@ alias log.error='_log 3 err'
 alias log.err='log.error'
 alias log.critical='_log 2 crit'
 alias log.crit='log.critical'
+# logging functions <--
 
 
-if [ "${BASH_SOURCE##*/}" = "${0##*/}" ]; then
-  log.debug "foo (level=notice)"
-  log.warn "bar (level=notice)"
-  debug? echo "Hello World! (level=notice)"
-
-  log.init level=7 dateoption="--utc" dateformat="%H:%M" tag=foo
-
-  log.debug "foo (level=debug)"
-  log.warn "bar (level=debug)"
-  debug? echo "Hello World! (level=debug)"
-fi
+## examples -->
+#  log.debug "foo (level=notice)"
+#  log.warn "bar (level=notice)"
+#  debug? echo "Hello World! (level=notice)"
+#  
+#  log.init level=7 dateoption="--utc" dateformat="%H:%M" tag=foo
+#  
+#  log.debug "foo (level=debug)"
+#  log.warn "bar (level=debug)"
+#  debug? echo "Hello World! (level=debug)"
+## examples <--

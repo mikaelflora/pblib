@@ -1,25 +1,31 @@
-# pblib
+# pblibraries
 
 ## Synopsis
 
-Personal Bash libraries:
+Personal Bash libraries:  
+
   - **checking.bash**: check syntax
   - **iniparsing.bash**: handling file configuration (INI file)
   - **logging.bash**: basic logger
   - **syslogging.bash**: syslogger (logger wrapper)
   - **processing.bash**: manage jobs
+  - **ui.bash**: user interface functions
 
-## Installation
+## Getting started
 
-Get source code and install:
+### Installation
+
+Get source code and install:  
+
 ```bash
 git clone https://github.com/mikaelflora/pblib.git
 ./pblib/install.bash
 ```
 
-## Getting started
+### Usage
 
-In your source code:
+In your source code:  
+
 ```bash
 #!/bin/bash
 
@@ -29,7 +35,7 @@ PATH=${PATH}:/usr/local/lib/bash/pblib
 # Use a specific library:
 . logging.bash
 
-# Or all libraries:
+# Or all libraries (except logging):
 . pblib.bash
 ```
 

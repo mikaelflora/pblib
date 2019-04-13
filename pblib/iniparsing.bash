@@ -2,15 +2,14 @@
 
 
 # ----------------------------------------------------------------------------
-# :author:  Mikael FLORA <mikaelflora@hotmail.com>
-# :version: 0.2
-# :date:    2016-06-17
+# :author:  Mikael FLORA
+# :date:    2019-04-13
 # :brief:   config parser (ini file) with associative array
 # :TODO:    code review
 # ----------------------------------------------------------------------------
 
 
-
+# iniparsing functions -->
 ini.common.to.Array.key () {
 # desc: load key's value from config gile section to key associative array
 # $1: file to parse
@@ -39,7 +38,6 @@ ini.common.to.Array.key () {
   done < <(sed -e '/\[.*\]/,$d' ${1} | sed "s#;.*##g")
   unset tmp key value
 }
-
 
 ini.to.Array.key () {
 # desc: load key's value from config gile section to key associative array
@@ -72,7 +70,6 @@ ini.to.Array.key () {
   unset tmp key value
 }
 
-
 ini.to.Array.keys () {
 # desc: load config from sections in file to associative arrays
 # $1: file to parse 
@@ -82,7 +79,6 @@ ini.to.Array.keys () {
     ini.to.Array $1 $2 $2 ${key}
   done
 }
-
 
 ini.common.to.Array () {
 # desc: load from (no section) config file to associative array
@@ -100,7 +96,6 @@ ini.common.to.Array () {
     fi
   done < <(sed -e '/\[.*\]/,$d' ${1} | sed "s#;.*##g")
 }
-
 
 ini.to.Array () {
 # desc: load from section config file to associative array
@@ -126,7 +121,6 @@ ini.to.Array () {
   fi
 }
 
-
 ini.to.Arrays () {
 # desc: load config from sections in file to associative arrays
 # $1: file to parse 
@@ -135,7 +129,6 @@ ini.to.Arrays () {
     ini.to.Array $1 ${section}
   done
 }
-
 
 print.Array () {
 # desc: print associative array as inifile section
@@ -153,7 +146,6 @@ print.Array () {
   echo ""
 }
 
-
 print.Arrays () {
 # desc: print associative arrays as inifile sections
 # $*: sections / associative arrays to load / use
@@ -161,7 +153,6 @@ print.Arrays () {
     print.Array ${section}
   done
 }
-
 
 Array.to.ini () {
 # desc: write inifile (from associative array to inifile)
@@ -173,7 +164,6 @@ Array.to.ini () {
   print.Array $2 $section >> $1
 }
 
-
 Arrays.to.ini () {
 # desc: write inifile (from associative arrays to inifile)
 # $1: file
@@ -182,7 +172,6 @@ Arrays.to.ini () {
     print.Array $array $array >> $1
   done
 }
-
 
 shopt -s expand_aliases
 
@@ -194,26 +183,27 @@ alias iniparse.print.as='print.Array'
 alias iniparse.write.as='Array.to.ini'
 alias iniparse.get.key='ini.to.Array.key'
 alias iniparse.get.keys='ini.to.Array.keys'
+# iniparsing functions <--
 
 
-if [ "${BASH_SOURCE##*/}" = "${0##*/}" ]; then
-  declare -A CONF=(
-    [b]="bar"
-    [f]=""
-  )
-
-  echo "print associative array:"
-  iniparse.print CONF
-  echo "write test.conf and cat test.conf:"
-  iniparse.write test.conf CONF
-  cat test.conf
-  echo "unset CONF[b] and print associative array:"
-  unset CONF[b]
-  iniparse.print CONF
-  echo "load test.conf in associative array,"
-  iniparse.load test.conf CONF
-  echo "and print associative array:"
-  iniparse.print CONF
-  echo "rm test.conf"
-  rm test.conf
-fi
+## examples -->
+#  declare -A CONF=(
+#    [b]="bar"
+#    [f]=""
+#  )
+#  
+#  echo "print associative array:"
+#  iniparse.print CONF
+#  echo "write test.conf and cat test.conf:"
+#  iniparse.write test.conf CONF
+#  cat test.conf
+#  echo "unset CONF[b] and print associative array:"
+#  unset CONF[b]
+#  iniparse.print CONF
+#  echo "load test.conf in associative array,"
+#  iniparse.load test.conf CONF
+#  echo "and print associative array:"
+#  iniparse.print CONF
+#  echo "rm test.conf"
+#  rm test.conf
+## examples <--

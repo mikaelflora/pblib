@@ -2,26 +2,25 @@
 
 
 # ----------------------------------------------------------------------------
-# :author:  Mikael FLORA <mikaelflora@hotmail.com>
-# :version: 0.1
-# :date:    2016-06-12
+# :author:  Mikael FLORA
+# :date:    2019-04-13
 # :brief:   import all libraries
 # ----------------------------------------------------------------------------
 
 
 . checking.bash
 . iniparsing.bash
-. logging.bash
 . processing.bash
 . syslogging.bash
+. ui.bash
 
 
-if [ "${BASH_SOURCE##*/}" = "${0##*/}" ]; then
-  if valid.IP? 192.168.1.10; then
-    echo "valid IP 192.168.1.10"
-  fi
-
-  syslog.error "test"
-  echo "/var/log/syslog:"
-  tail /var/log/syslog
-fi
+## exemples -->
+#  if valid.IP? 192.168.1.10; then
+#    echo "valid IPv4 address: 192.168.1.10"
+#  fi
+#  
+#  syslog.error 'my test'
+#  echo '/var/log/syslog:'
+#  tail /var/log/syslog
+## exemples <--
